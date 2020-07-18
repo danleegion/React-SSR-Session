@@ -33,18 +33,26 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/checksession', async (req, res) => {
+  const sessionValue = `<script type="text/javascript">
+  window.inputName="${req.session.inputName}";
+  </script>`;
+
   const theHtml = `
   <html>
-  <head><title>My First SSR</title></head>
+  <head>
+    <title>My First SSR</title>
+    ${sessionValue}
+  </head>
   <body>
   <div id="reactele">{{{reactele}}}</div>
+  <script src="/checkSession.js" charset="utf-8"></script>
+  <script src="/vendor.js" charset="utf-8"></script>
   </body>
   </html>
   `;
   const hbsTemplate = hbs.compile(theHtml);
   const reactComp = renderToString(<CheckSession />);
   const htmlToSend = hbsTemplate({ reactele: reactComp });
-  console.log(req.session.inputName);
   return res.send(htmlToSend);
 });
 

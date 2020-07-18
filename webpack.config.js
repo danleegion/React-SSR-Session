@@ -1,22 +1,23 @@
-const path = require("path");
+const path = require('path');
 
 const config = {
   entry: {
-    vendor: ["@babel/polyfill", "react"],
-    app: ["./src/components/index.js"]
+    vendor: ['@babel/polyfill', 'react'],
+    app: ['./src/components/appHydrate.js'],
+    checkSession: ['./src/components/checkSessionHydrate.js']
   },
   output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "[name].js"
+    path: path.resolve(__dirname, 'public'),
+    filename: '[name].js'
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"]
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         },
         exclude: /node_modules/
@@ -24,7 +25,7 @@ const config = {
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx", ".json", ".wasm", ".mjs", "*"]
+    extensions: ['.js', '.jsx', '.json', '.wasm', '.mjs', '*']
   }
 };
 
